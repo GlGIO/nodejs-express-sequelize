@@ -6,5 +6,3 @@ class PessoaServices extends Services {
 	}
 
 }
-
-export PessoaServices 
