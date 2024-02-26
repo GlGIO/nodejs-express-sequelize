@@ -1,8 +1,15 @@
 const Services = require("./Services.js");
-
-class PessoaServices extends Services {
+class PessoasServices extends Services {
 	constructor() {
-		super("Pessoas");
+		super("Pessoa");
+	}
+
+	async pegaMatriculasPorEstudante(id) {
+		const estudante = await super.pegaUmRegistroPorId(id);
+		const listaMatriculas = await estudante.getAulasMatriculadas();
+		return listaMatriculas;
 	}
 
 }
+
+module.exports = PessoasServices;

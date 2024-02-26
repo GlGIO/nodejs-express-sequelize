@@ -1,13 +1,18 @@
-const database = require("../models");
+const Controller = require("./Controller.js");
+const PessoasServices = require("../services/PessoasServices.js");
 
-class PessoaController {
-	static async pegaTodas(req, res) {
-		try {
-			const listaDePessoas = await database.Pessoa.findAll();
-			return res.status(200).json(listaDePessoas);
-		} catch (error) {
-			// Aqui estamos tratando o erro
-		}
+const pessoaServices = new PessoasServices();
+
+class PessoaController extends Controller {
+
+	constructor() {
+		super(pessoaServices);
+	}
+
+	async pegaMatriculas(req, res) {
+		const { estudanteId } = req.params;
+		const matriculas = await pessoaServices.pegaMatriculasPorEstudante(Number(estudanteId));
+		res.status(200).json(matriculas);
 	}
 }
 
